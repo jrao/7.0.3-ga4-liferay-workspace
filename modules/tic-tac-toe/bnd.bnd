@@ -1,0 +1,4 @@
+Bundle-Name: tic-tac-toe
+Bundle-SymbolicName: com.liferay.tictactoe
+Bundle-Version: 1.0.0
+Export-Package: com.liferay.tictactoe.constants

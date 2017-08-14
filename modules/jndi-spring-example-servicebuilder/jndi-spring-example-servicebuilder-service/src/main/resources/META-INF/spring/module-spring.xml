@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation=" http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean class="com.liferay.springexample.servicebuilder.service.impl.FooLocalServiceImpl" id="com.liferay.springexample.servicebuilder.service.FooLocalService" />
+	<bean class="com.liferay.springexample.servicebuilder.service.impl.FooServiceImpl" id="com.liferay.springexample.servicebuilder.service.FooService" />
+	<bean class="com.liferay.springexample.servicebuilder.service.persistence.impl.FooPersistenceImpl" id="com.liferay.springexample.servicebuilder.service.persistence.FooPersistence" parent="basePersistence" />
+	<bean class="com.liferay.springexample.servicebuilder.service.impl.javatestLocalServiceImpl" id="com.liferay.springexample.servicebuilder.service.javatestLocalService" />
+	<bean class="com.liferay.springexample.servicebuilder.service.persistence.impl.javatestPersistenceImpl" id="com.liferay.springexample.servicebuilder.service.persistence.javatestPersistence" parent="basePersistence">
+		<property name="dataSource" ref="javatestDataSource" />
+		<property name="sessionFactory" ref="javatestSessionFactory" />
+	</bean>
+</beans>

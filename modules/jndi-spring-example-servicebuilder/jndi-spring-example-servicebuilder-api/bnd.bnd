@@ -1,0 +1,9 @@
+Bundle-Name: jndi-spring-example-servicebuilder-api
+Bundle-SymbolicName: com.liferay.springexample.servicebuilder.api
+Bundle-Version: 1.0.0
+Export-Package:\
+	com.liferay.springexample.servicebuilder.exception,\
+	com.liferay.springexample.servicebuilder.model,\
+	com.liferay.springexample.servicebuilder.service,\
+	com.liferay.springexample.servicebuilder.service.persistence
+-includeresource: META-INF/service.xml=../jndi-spring-example-servicebuilder-service/service.xml

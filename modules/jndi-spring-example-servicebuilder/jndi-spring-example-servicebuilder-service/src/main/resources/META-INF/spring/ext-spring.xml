@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+	<!-- 
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location">
+			<value>/jdbc.properties</value>
+		</property>
+		<property name="placeholderPrefix" value="${jdbc." />
+	</bean>
+	-->
+	<!--
+	<bean class="org.springframework.jdbc.datasource.DriverManagerDataSource" id="jiraDataSourceTarget">
+		<property name="driverClassName" value="${jdbc.jira.driverClassName}" />
+		<property name="url" value="${jdbc.jira.url}" />
+		<property name="username" value="${jdbc.jira.username}" />
+		<property name="password" value="${jdbc.jira.password}" />
+	</bean>
+	-->
+	<bean id="javatestDataSourceTarget" class="com.liferay.portal.spring.jndi.JndiObjectFactoryBean" lazy-init="true">
+		<property name="jndiName">
+			<value>jdbc/TestDB</value>
+		</property>
+	</bean>
+	<bean class="org.springframework.jdbc.datasource.LazyConnectionDataSourceProxy" id="javatestDataSource">
+		<property name="targetDataSource">
+			<ref bean="javatestDataSourceTarget" />
+		</property>
+	</bean>
+	<bean class="com.liferay.portal.spring.hibernate.PortletHibernateConfiguration" id="javatestHibernateSessionFactory">
+		<property name="dataSource">
+			<ref bean="javatestDataSource" />
+		</property>
+	</bean>
+	<bean class="com.liferay.portal.dao.orm.hibernate.SessionFactoryImpl" id="javatestSessionFactory">
+		<property name="sessionFactoryImplementor">
+			<ref bean="javatestHibernateSessionFactory" />
+		</property>
+	</bean>
+	<bean class="org.springframework.orm.hibernate3.HibernateTransactionManager" id="javatestTransactionManager">
+		<property name="dataSource">
+			<ref bean="javatestDataSource" />
+		</property>
+		<property name="sessionFactory">
+			<ref bean="javatestHibernateSessionFactory" />
+		</property>
+	</bean>
+</beans>
+
+<!-- 
+<beans>
+	<bean id="testDB" class="com.liferay.portal.spring.jndi.JndiObjectFactoryBean" lazy-init="true">
+		<property name="jndiName">
+			<value>java:comp/env/jdbc/TestDB</value>
+		</property>
+	</bean>
+</beans>
+-->
