@@ -1,4 +1,0 @@
-Bundle-Name: jndi-spring-example-portlet
-Bundle-SymbolicName: com.liferay.springexample
-Bundle-Version: 1.0.0
-Export-Package: com.liferay.springexample.constants
