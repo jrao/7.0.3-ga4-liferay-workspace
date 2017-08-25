@@ -223,4 +223,6 @@ public interface CountryLocalService extends BaseLocalService,
 	*/
 	@Indexable(type = IndexableType.REINDEX)
 	public Country updateCountry(Country country);
+
+	public void useJNDI();
 }

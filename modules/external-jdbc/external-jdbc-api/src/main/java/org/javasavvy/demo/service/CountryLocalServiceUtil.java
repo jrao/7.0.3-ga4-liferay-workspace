@@ -247,6 +247,10 @@ public class CountryLocalServiceUtil {
 		return getService().updateCountry(country);
 	}
 
+	public static void useJNDI() {
+		getService().useJNDI();
+	}
+
 	public static CountryLocalService getService() {
 		return _serviceTracker.getService();
 	}

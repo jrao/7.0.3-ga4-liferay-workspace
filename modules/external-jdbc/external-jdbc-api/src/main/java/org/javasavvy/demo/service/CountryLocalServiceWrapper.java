@@ -259,6 +259,11 @@ public class CountryLocalServiceWrapper implements CountryLocalService,
 	}
 
 	@Override
+	public void useJNDI() {
+		_countryLocalService.useJNDI();
+	}
+
+	@Override
 	public CountryLocalService getWrappedService() {
 		return _countryLocalService;
 	}

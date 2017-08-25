@@ -14,7 +14,16 @@
 
 package org.javasavvy.demo.service.impl;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+import javax.sql.DataSource;
+
 import org.javasavvy.demo.service.base.CountryLocalServiceBaseImpl;
+
+import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 
 /**
  * The implementation of the country local service.
@@ -36,4 +45,42 @@ public class CountryLocalServiceImpl extends CountryLocalServiceBaseImpl {
 	 *
 	 * Never reference this class directly. Always use {@link org.javasavvy.demo.service.CountryLocalServiceUtil} to access the country local service.
 	 */
+	
+	public void useJNDI() {
+		System.out.println("In CountryLocalServiceImpl.useJNDI()!");
+		
+		Thread thread = Thread.currentThread();
+
+		// Use portal class loader
+		ClassLoader origLoader = thread.getContextClassLoader();
+		thread.setContextClassLoader(PortalClassLoaderUtil.getClassLoader());
+
+		try {
+			// Invoke JNDI Resource
+			DataSource datasource = countryPersistence.getDataSource();
+
+			Connection connection = datasource.getConnection();
+			Statement statement = connection.createStatement();
+			ResultSet resultSet = statement.executeQuery("select id, name from country");
+
+			while (resultSet.next()) {
+				System.out.println("Record:");
+				String id = resultSet.getString("id");
+				System.out.println("ID: " + id);
+				String name = resultSet.getString("name");
+				System.out.println("Name: " + name);
+				System.out.println();
+			}
+			
+			connection.close();
+		}
+		catch (SQLException sqle) {
+			sqle.printStackTrace();
+		}
+		finally {
+			// Switch back to the original class loader
+			thread.setContextClassLoader(origLoader);
+		}
+	}
+	
 }
