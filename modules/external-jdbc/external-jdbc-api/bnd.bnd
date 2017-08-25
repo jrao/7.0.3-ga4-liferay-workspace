@@ -1,0 +1,9 @@
+Bundle-Name: external-jdbc-api
+Bundle-SymbolicName: org.javasavvy.demo.api
+Bundle-Version: 1.0.0
+Export-Package:\
+	org.javasavvy.demo.exception,\
+	org.javasavvy.demo.model,\
+	org.javasavvy.demo.service,\
+	org.javasavvy.demo.service.persistence
+-includeresource: META-INF/service.xml=../external-jdbc-service/service.xml
